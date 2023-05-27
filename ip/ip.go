@@ -5,16 +5,18 @@ import (
 	"net/http"
 )
 
-func GetIP() (string, error) {
+func GetIP() string {
 	res, err := http.Get("https://api.ipify.org?format=text")
 	if err != nil {
-		return "", err
+		return ""
 	}
 	defer res.Body.Close()
 
 	ip, err := ioutil.ReadAll(res.Body)
+
 	if err != nil {
-		return "", err
+		return ""
 	}
-	return string(ip), nil
+
+	return string(ip)
 }
